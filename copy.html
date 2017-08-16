@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<!-- IE模式下用edge内涵渲染 -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<!-- 设备宽度等于宽度，不能缩放 -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+		<title>bootstrap+jquery效果的进度条</title>
+		<link href="bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet">
+
+		<!--[if lt IE 9]>
+			<script src="static/js/html5shiv.min.js"></script>
+			<script src="static/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<style>
+		#container{
+			margin:100px auto;
+		}
+	</style>
+
+	<body>
+		<div id="container" class="container">
+			<div class="progress progress-striped">
+	  			<div class="progress-bar progress-bar-primary" id="processbar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+	    			<span id="aa">0%</span>
+	  			</div>
+			</div>
+			<button  id="btn1" class="btn btn-info">开始</button>
+			<button  id="btn2" class="btn btn-info">暂停</button>
+			<button  id="btn3" class="btn btn-info">重新加载</button>
+		</div>
+
+		<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+		<script src="bootstrap-3.3.7/js/bootstrap.js"></script>
+
+		<script>
+		$(function(){
+			var num = 0;
+			var timer = null;
+			function move(){
+				num++;
+				if (num <=100) {
+					$("#processbar").css("width",num+"%").text(num+"%");
+				}
+
+			}   //通过点击事件,开启,关闭,重新加载，进度条。
+				$("#btn1").click(function(){
+					timer = setInterval(move, 100);
+				})
+				$("#btn2").click(function(){
+					clearInterval(timer);
+				})
+				$("#btn3").click(function(){
+					clearInterval(timer);
+					$("#processbar").css("width",0 + "%").text( 0 +"%");
+					num = 0;
+				})
+		})
+			
+		</script>
+	</body>
+</html>
